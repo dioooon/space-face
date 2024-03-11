@@ -1,0 +1,14 @@
+info face="Oswald" size=138 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0
+common lineHeight=138 base=138 scaleW=512 scaleH=512 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="minute_0.png"
+chars count=10
+char id=52   x=0     y=0     width=79    height=131   xoffset=3     yoffset=3     xadvance=84    page=0  chnl=15
+char id=51   x=79    y=0     width=73    height=136   xoffset=5     yoffset=1     xadvance=83    page=0  chnl=15
+char id=56   x=0     y=136   width=73    height=135   xoffset=5     yoffset=2     xadvance=84    page=0  chnl=15
+char id=48   x=152   y=0     width=72    height=136   xoffset=8     yoffset=1     xadvance=88    page=0  chnl=15
+char id=57   x=73    y=136   width=73    height=134   xoffset=5     yoffset=2     xadvance=87    page=0  chnl=15
+char id=50   x=146   y=136   width=74    height=132   xoffset=5     yoffset=2     xadvance=83    page=0  chnl=15
+char id=54   x=224   y=0     width=72    height=134   xoffset=8     yoffset=2     xadvance=87    page=0  chnl=15
+char id=53   x=224   y=134   width=71    height=134   xoffset=6     yoffset=3     xadvance=82    page=0  chnl=15
+char id=55   x=0     y=271   width=63    height=131   xoffset=2     yoffset=3     xadvance=71    page=0  chnl=15
+char id=49   x=63    y=271   width=46    height=131   xoffset=3     yoffset=3     xadvance=62    page=0  chnl=15

@@ -1,0 +1,3 @@
+<layout id="WatchFace">
+    <bitmap id="background" x="center" y="center" filename="../drawables/particles.png" />
+</layout>

@@ -1,0 +1,6 @@
+<fonts>
+  <font id="HourFont" filename="hour.fnt" antialias="true" />
+  <font id="MinuteFont" filename="minute.fnt" antialias="true" />
+  <font id="DataFont" filename="data.fnt" antialias="true" />
+  <font id="DateFont" filename="date.fnt" antialias="true" />
+</fonts>

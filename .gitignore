@@ -1,0 +1,9 @@
+bin
+developer_key
+gen
+internal-mir
+mir
+*.prg*
+dist
+.idea
+.vscode
