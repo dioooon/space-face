@@ -11,6 +11,7 @@ font: clean
 	build/fontbm --font-size 16 --chars-file build/chars-file-data.txt --font-file build/Oswald-ExtraLight.ttf --output resources/fonts/data
 
 clean: clean_cache
+	rm -f dist/*
 	rm -f resources/fonts/*.fnt
 	rm -f resources/fonts/*.png
 

@@ -46,7 +46,7 @@ class SpaceView extends WatchUi.WatchFace {
       drawSteps(dc);
     }
 
-    function drawHours(dc) {
+    function drawHours(dc) as Void {
       var padding = 5;
       var clockTime = System.getClockTime();
       var hours = clockTime.hour.format("%02d");
@@ -63,7 +63,7 @@ class SpaceView extends WatchUi.WatchFace {
       );
     }
 
-    function drawBodyBattery(dc) {
+    function drawBodyBattery(dc) as Void {
       var bodyBatteryCount = retrieveBodyBatteryText();
       var hourFontHeight = dc.getFontHeight(hourFont);
 
@@ -89,7 +89,7 @@ class SpaceView extends WatchUi.WatchFace {
       );
     }
 
-    private function retrieveBodyBatteryText() {
+    private function retrieveBodyBatteryText() as String {
       var iterator = Toybox.SensorHistory.getBodyBatteryHistory({:period => 1, :order => SensorHistory.ORDER_NEWEST_FIRST});
       var value = iterator.next();
       if (value != null && value.data != null) {
@@ -99,7 +99,7 @@ class SpaceView extends WatchUi.WatchFace {
       }
     }
 
-    function drawMinutes(dc) {
+    function drawMinutes(dc) as Void {
       var padding = 5;
       var clockTime = System.getClockTime();
       var minutes = clockTime.min.format("%02d");
@@ -116,7 +116,7 @@ class SpaceView extends WatchUi.WatchFace {
       );
     }
 
-    function drawDate(dc) {
+    function drawDate(dc) as Void {
       var weekdayArray = ["День", "Воскресенье", "Понедельник" , "Вторник" , "Среда" , "Четверг" , "Пятница" , "Суббота"] as Array<String>;
       var monthArray = ["Месяц", "Января" , "Февраля" , "Марта" , "Апреля" , "Мая" , "Июня" , "Июля" , "Августа" , "Сентября" , "Октября" , "Ноября" , "Декабря"] as Array<String>;
 
@@ -161,13 +161,14 @@ class SpaceView extends WatchUi.WatchFace {
       );
     }
 
-    function drawHeartRate(dc) {
+    function drawHeartRate(dc) as Void {
       var title = "Pulse";
       var heartRate = retrieveHeartRateText();
 
-      var margin = 13; // Margin on moddle
+      var margin = 13; // Margin on middle
       var paddingLeft = 5;
       var padding = 10; // Padding between title и value
+
       var dataFontHeight = dc.getFontHeight(dataFont);
 
       dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -186,20 +187,36 @@ class SpaceView extends WatchUi.WatchFace {
         dc.getWidth() / 2 + paddingLeft,
         ((dc.getHeight() / 2) + dataFontHeight + margin + padding),
         dateFont,
-        heartRate,
+        heartRate[0],
         Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
       );
+
+      dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+
+      if(heartRate[1] != null) {
+        var maring = 5;
+        var heartRateStringWidth = dc.getTextWidthInPixels(heartRate[0], dateFont);
+
+        dc.drawText(
+          dc.getWidth() / 2 + paddingLeft + heartRateStringWidth + maring,
+          ((dc.getHeight() / 2) + dataFontHeight + margin + padding),
+          dateFont,
+          heartRate[1].toUpper(),
+          Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER
+        );
+      }
     }
 
-    private function retrieveHeartRateText() {
+    private function retrieveHeartRateText() as [String, String | Null] {
+      var unit = "bpm";
       var info = Activity.getActivityInfo();
 
       if (info != null) {
         var hr = info.currentHeartRate;
         if (hr == null) {
-          return "--";
+          return ["--", null];
         }
-        return Lang.format("$1$$2$", [hr, "BPM"]);
+        return [Lang.format("$1$", [hr]), unit];
       }
 
 
@@ -208,17 +225,17 @@ class SpaceView extends WatchUi.WatchFace {
       var sample = hrIterator.next();
 
       if (sample == null) {
-        return "--";
+        return ["--", null];
       }
 
       if (sample.heartRate == ActivityMonitor.INVALID_HR_SAMPLE) {
-        return "--";
+        return ["--", null];
       }
       
-      return Lang.format("$1$ $2$", [sample.heartRate, "BPM"]);
+      return [Lang.format("$1$", [sample.heartRate]), unit];
     }
 
-    function drawSteps(dc) {
+    function drawSteps(dc) as Void {
       var title = "Steps";
       var info = ActivityMonitor.getInfo();
       var stepCount = info.steps.toString();
